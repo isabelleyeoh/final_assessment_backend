@@ -57,19 +57,21 @@ def create():
             return make_response(jsonify(responseObject)), 201
 
 @users_api_blueprint.route('/getprofile', methods=['GET'])
+@login_required
 def getprofile():
     user_id = User.decode_auth_token(auth_token)
     user = User.get_or_none(id=user_id)
     return jsonify(users)
 
 @users_api_blueprint.route('/updateprofile', methods=['POST'])
+@login_required
 def update():
 
     auth_header = request.headers.get('Authorization')
 
     if auth_header:
         auth_token = auth_header.split(" ")[1]
-        breakpoint()
+        # breakpoint()
 
     else:
         responseObject = {
@@ -91,9 +93,8 @@ def update():
     if q.execute():
         responseObject = {
             'status': 'success',
-            'message': 'Successfully edit.',
+            'message': 'Successfully edited.',
         }
-
         return make_response(jsonify(responseObject)), 201
 
     else:
@@ -106,6 +107,7 @@ def update():
 
 
 @users_api_blueprint.route('/delete', methods=['POST'])
+@login_required
 def delete():
 
     auth_header = request.headers.get('Authorization')
@@ -129,7 +131,7 @@ def delete():
     if q.execute():
         responseObject = {
             'status': 'success',
-            'message': 'Successfully edit.',
+            'message': 'Successfully deleted.',
         }
 
         return make_response(jsonify(responseObject)), 201
