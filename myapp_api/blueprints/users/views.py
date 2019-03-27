@@ -84,7 +84,8 @@ def update():
     user = User.get_or_none(id=user_id)
     post_data = request.get_json()
     update_username = post_data['username']
-    update_password = post_data['password']
+    update_password = generate_password_hash(post_data['password'])
+
 
     q = User.update(username=update_username, password=update_password).where(User.id==user_id)
 
