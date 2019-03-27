@@ -56,12 +56,6 @@ def create():
 
             return make_response(jsonify(responseObject)), 201
 
-@users_api_blueprint.route('/getprofile', methods=['GET'])
-def getprofile():
-    user_id = User.decode_auth_token(auth_token)
-    user = User.get_or_none(id=user_id)
-    return jsonify(users)
-
 @users_api_blueprint.route('/updateprofile', methods=['POST'])
 def update():
 
