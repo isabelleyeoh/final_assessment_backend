@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, make_response, request
+from flask_login import login_required
 from models.user import *
 from werkzeug.security import generate_password_hash
 
