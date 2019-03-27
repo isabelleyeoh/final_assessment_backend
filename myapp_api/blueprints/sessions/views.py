@@ -20,7 +20,7 @@ def sign_in():
             'auth_token': auth_token.decode(),
             'user': {"id": int(user.id), "username": user.username}
         }
-
+        
         return make_response(jsonify(responseObject)), 201
 
     else:
